@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Cart() {
   const [cart, setCart] = useState({
@@ -8,18 +9,45 @@ function Cart() {
     total_amount: 0,
   });
 
-  useEffect(() => {
-    const fetchCart = async () => {
-      try {
-        const response = await api.get("/cart/");
-        setCart(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  const fetchCart = async () => {
+    try {
+      const response = await api.get("/cart/");
+      setCart(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  useEffect(() => {
     fetchCart();
   }, []);
+
+  const updateQuantity = async (productId, quantity) => {
+    if (quantity <= 0) {
+      return;
+    }
+
+    try {
+      await api.put(`/cart/items/${productId}?quantity=${quantity}`);
+      fetchCart();
+    } catch (error) {
+      toast.error(
+        error.response?.data?.detail || "Unable to update quantity"
+      );
+    }
+  };
+
+  const removeItem = async (productId) => {
+    try {
+      await api.delete(`/cart/items/${productId}`);
+      toast.success("Item removed from cart");
+      fetchCart();
+    } catch (error) {
+      toast.error(
+        error.response?.data?.detail || "Unable to remove item"
+      );
+    }
+  };
 
   return (
     <div className="products-page">
@@ -45,9 +73,44 @@ function Cart() {
 
               <p>Price: ${item.price}</p>
 
-              <p>Quantity: {item.quantity}</p>
-
               <p>Subtotal: ${item.subtotal}</p>
+
+              <div className="quantity-controls">
+                <button
+                  className="quantity-button"
+                  onClick={() =>
+                    updateQuantity(
+                      item.product_id,
+                      item.quantity - 1
+                    )
+                  }
+                >
+                  -
+                </button>
+
+                <span className="quantity-number">
+                  {item.quantity}
+                </span>
+
+                <button
+                  className="quantity-button"
+                  onClick={() =>
+                    updateQuantity(
+                      item.product_id,
+                      item.quantity + 1
+                    )
+                  }
+                >
+                  +
+                </button>
+              </div>
+
+              <button
+                className="remove-button"
+                onClick={() => removeItem(item.product_id)}
+              >
+                Remove
+              </button>
             </div>
           ))}
         </div>
