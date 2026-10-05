@@ -36,6 +36,7 @@ A full-stack digital product store built with FastAPI and React.
 
 ## Project Structure
 
+```text
 Digital-Product-Store/
 │
 ├── backend/
@@ -68,34 +69,44 @@ Digital-Product-Store/
 ├── .gitignore
 ├── package.json
 └── README.md
+```
 
 ## Run Backend
 
+```bash
 cd backend
 source venv/bin/activate
 uvicorn app.main:app --reload
+```
 
 Backend:
+
 http://127.0.0.1:8000
 
 Swagger:
+
 http://127.0.0.1:8000/docs
 
 ## Run Frontend
 
+```bash
 cd frontend
 npm install
 npm run dev
+```
 
 Frontend:
+
 http://localhost:5173
 
 ## Testing
 
 Run backend tests:
 
+```bash
 cd backend
 python -m pytest
+```
 
 Current result:
 
@@ -105,4 +116,4 @@ Current result:
 
 Stripe Checkout and webhook are implemented using Stripe test-mode configuration.
 
-Stripe keys should be stored in the .env file and should not be committed to Git.
+Stripe keys should be stored in the `.env` file and should not be committed to Git.
