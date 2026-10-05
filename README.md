@@ -37,8 +37,37 @@ A full-stack digital product store built with FastAPI and React.
 ## Project Structure
 
 Digital-Product-Store/
+│
 ├── backend/
-└── frontend/
+│   ├── app/
+│   │   ├── models/
+│   │   ├── routers/
+│   │   ├── schemas/
+│   │   ├── services/
+│   │   ├── database.py
+│   │   ├── dependencies.py
+│   │   └── main.py
+│   ├── tests/
+│   ├── .env.example
+│   ├── requirements.txt
+│   └── README.md
+│
+├── frontend/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── pages/
+│   │   ├── assets/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── public/
+│   ├── package.json
+│   └── README.md
+│
+├── Backend_Screenshots/
+├── Frontend_Screenshots/
+├── .gitignore
+├── package.json
+└── README.md
 
 ## Run Backend
 
