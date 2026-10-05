@@ -1,0 +1,19 @@
+# Backend
+backend/venv/
+backend/.env
+backend/**/__pycache__/
+backend/.pytest_cache/
+backend/store.db
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# Root node modules
+node_modules/
+
+# macOS
+.DS_Store
+
+
+
